@@ -259,48 +259,34 @@ section { padding:5.5rem 2rem }
 .exp-sec { background:var(--white) }
 .exp-list { display:flex; flex-direction:column; gap:1.25rem }
 .exp-card {
-  display:flex;
   background:var(--white); border:1px solid var(--border);
   border-radius:14px; overflow:hidden; transition:all .25s;
 }
 .exp-card:hover { box-shadow:0 4px 24px rgba(0,0,0,.07); transform:translateY(-2px) }
-
-/* Left body — 3/4 width */
-.exp-body {
-  flex:3; min-width:0;
-  padding:1.75rem 1.75rem 1.75rem 2.25rem;
-  position:relative;
-}
-.exp-body::before {
+.exp-inner { padding:1.75rem 1.75rem 1.75rem 2.25rem; position:relative }
+.exp-inner::before {
   content:''; position:absolute; left:0; top:0; bottom:0;
   width:3px; border-radius:3px 0 0 3px;
 }
-.c-green .exp-body::before  { background:var(--green) }
-.c-blue  .exp-body::before  { background:var(--blue) }
-.c-purple .exp-body::before { background:var(--purple) }
-.c-gold  .exp-body::before  { background:var(--gold) }
-.c-teal  .exp-body::before  { background:var(--teal) }
-
-/* Right sidebar — 1/4 width, full card height */
-.exp-sidebar {
-  flex:0 0 25%;
-  overflow:hidden;
-  background:var(--bg);
-  border-left:1px solid var(--border);
-  position:relative;
+.c-green .exp-inner::before  { background:var(--green) }
+.c-blue  .exp-inner::before  { background:var(--blue) }
+.c-purple .exp-inner::before { background:var(--purple) }
+.c-gold  .exp-inner::before  { background:var(--gold) }
+.c-teal  .exp-inner::before  { background:var(--teal) }
+/* New: top row = title+badge left, thumbnail right */
+.exp-head-row {
+  display:flex; align-items:flex-start;
+  gap:1.25rem; margin-bottom:.85rem;
 }
-.exp-sidebar img {
-  width:100%; height:100%;
-  object-fit:cover; object-position:center 20%;
-  display:block; transition:transform .4s;
+.exp-head-left { flex:1; min-width:0 }
+.exp-thumb {
+  width:130px; height:130px;
+  object-fit:cover; object-position:center 25%;
+  border-radius:10px; flex-shrink:0;
+  border:1px solid var(--border);
+  transition:transform .35s;
 }
-.exp-card:hover .exp-sidebar img { transform:scale(1.04) }
-
-/* Sidebar with 3 stacked photos (Language Ambassador) */
-.exp-sidebar-stack { display:flex; flex-direction:column }
-.exp-sidebar-stack img { width:100%; flex:1; object-fit:cover; object-position:center center }
-.exp-sidebar-stack img:not(:last-child) { border-bottom:2px solid var(--white) }
-
+.exp-card:hover .exp-thumb { transform:scale(1.04) }
 .exp-header {
   display:flex; justify-content:space-between; align-items:flex-start;
   flex-wrap:wrap; gap:.5rem; margin-bottom:.35rem;
