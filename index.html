@@ -273,20 +273,40 @@ section { padding:5.5rem 2rem }
 .c-purple .exp-inner::before { background:var(--purple) }
 .c-gold  .exp-inner::before  { background:var(--gold) }
 .c-teal  .exp-inner::before  { background:var(--teal) }
-/* New: top row = title+badge left, thumbnail right */
-.exp-head-row {
-  display:flex; align-items:flex-start;
-  gap:1.25rem; margin-bottom:.85rem;
+/* Layout: 3/4 text left + 1/4 photo right */
+.exp-layout {
+  display:grid;
+  grid-template-columns: 3fr 1fr;
+  gap:1.25rem;
+  align-items:start;
 }
-.exp-head-left { flex:1; min-width:0 }
+.exp-layout-text { min-width:0 }
+.exp-layout-photos {
+  display:flex;
+  flex-direction:column;
+  gap:.55rem;
+  align-items:center;
+}
+/* Single main thumb */
 .exp-thumb {
-  width:130px; height:130px;
+  width:100%; aspect-ratio:1/1;
+  max-width:160px;
   object-fit:cover; object-position:center 25%;
-  border-radius:10px; flex-shrink:0;
+  border-radius:10px;
   border:1px solid var(--border);
   transition:transform .35s;
+  display:block;
 }
 .exp-card:hover .exp-thumb { transform:scale(1.04) }
+/* Sub-photos (Language Ambassador): stack vertically in right column */
+.sub-ph {
+  width:100%; max-width:160px;
+  aspect-ratio:4/3;
+  border-radius:8px; overflow:hidden; flex-shrink:0;
+}
+.sub-ph img { width:100%; height:100%; object-fit:cover; object-position:center center }
+/* legacy .sub-photos not used anymore but keep for safety */
+.sub-photos { display:contents }
 .exp-header {
   display:flex; justify-content:space-between; align-items:flex-start;
   flex-wrap:wrap; gap:.5rem; margin-bottom:.35rem;
@@ -306,9 +326,6 @@ section { padding:5.5rem 2rem }
 .exp-bullets li { font-size:.85rem; color:var(--grey); padding-left:1.25rem; position:relative; line-height:1.65 }
 .exp-bullets li::before { content:'→'; position:absolute; left:0; color:var(--green); font-size:.75rem; top:.15rem; font-weight:700 }
 .exp-bullets li strong { color:var(--ink2); font-weight:600 }
-.sub-photos { display:flex; gap:.75rem; margin-top:1rem }
-.sub-ph { width:110px; height:90px; border-radius:8px; overflow:hidden; flex-shrink:0 }
-.sub-ph img { width:100%; height:100%; object-fit:cover; object-position:center center }
 
 /* ══════════════════════════════════════════
    AWARDS
@@ -623,81 +640,85 @@ footer p { font-size:.75rem; color:rgba(255,255,255,.25) }
       <!-- SIG -->
       <div class="exp-card c-green reveal">
         <div class="exp-inner">
-          <div class="exp-head-row">
-            <div class="exp-head-left">
+          <div class="exp-layout">
+            <div class="exp-layout-text">
               <div class="exp-header">
                 <div class="exp-title">Marketing & Commercial Data Analyst Intern</div>
                 <span class="badge b-green">● Current</span>
               </div>
               <div class="exp-org o-green">PT Semen Indonesia (Persero) Tbk — SIG · BUMN · South Jakarta · Dec 2025 – Present</div>
+              <ul class="exp-bullets">
+                <li>Built real-time <strong>Market Intelligence Dashboard</strong> monitoring <strong>798,839 sales transactions</strong> (R Shiny + Excel) — daily visibility into brand performance, competitor positioning, and regional market dynamics across Indonesia</li>
+                <li>Conducted <strong>brand cannibalization analysis</strong> between main and fighting brands using Share of Wallet, volume movement, and average market growth — identifying regions where internal competition undermined portfolio contribution</li>
+                <li>Built <strong>Price Elasticity & Revenue Simulation Model</strong> using multiple regression (ASP → volume, market share, revenue per province) enabling what-if pricing scenario analysis for commercial teams</li>
+                <li>Delivered monthly KPI reports and demand forecasting summaries for senior management across Sales, Logistics, and Strategy divisions</li>
+              </ul>
             </div>
-            <img class="exp-thumb" src="images/exp-sig.jpeg"
-                 style="object-position:center 20%"
-                 alt="PT Semen Indonesia"
-                 onerror="this.style.display='none'">
+            <div class="exp-layout-photos">
+              <img class="exp-thumb" src="images/exp-sig.jpeg"
+                   style="object-position:center 20%"
+                   alt="PT Semen Indonesia"
+                   onerror="this.style.display='none'">
+            </div>
           </div>
-          <ul class="exp-bullets">
-            <li>Built real-time <strong>Market Intelligence Dashboard</strong> monitoring <strong>798,839 sales transactions</strong> (R Shiny + Excel) — daily visibility into brand performance, competitor positioning, and regional market dynamics across Indonesia</li>
-            <li>Conducted <strong>brand cannibalization analysis</strong> between main and fighting brands using Share of Wallet, volume movement, and average market growth — identifying regions where internal competition undermined portfolio contribution</li>
-            <li>Built <strong>Price Elasticity & Revenue Simulation Model</strong> using multiple regression (ASP → volume, market share, revenue per province) enabling what-if pricing scenario analysis for commercial teams</li>
-            <li>Delivered monthly KPI reports and demand forecasting summaries for senior management across Sales, Logistics, and Strategy divisions</li>
-          </ul>
         </div>
       </div>
 
       <!-- ASKRINDO -->
       <div class="exp-card c-blue reveal">
         <div class="exp-inner">
-          <div class="exp-head-row">
-            <div class="exp-head-left">
+          <div class="exp-layout">
+            <div class="exp-layout-text">
               <div class="exp-header">
                 <div class="exp-title">Underwriting Analyst Intern</div>
                 <span class="badge b-grey">Oct – Dec 2025</span>
               </div>
               <div class="exp-org o-blue">PT Asuransi Kredit Indonesia (ASKRINDO) · BUMN · Palu</div>
+              <ul class="exp-bullets">
+                <li>Performed <strong>financial ratio analysis for 50+ prospective clients</strong> — evaluating liquidity, solvency, and profitability to produce risk profiles used as primary references by senior underwriters</li>
+                <li>Managed policy data validation with <strong>100% accuracy</strong> across 30+ underwriting cases; reduced file review time by <strong>20%</strong> through systematic OJK-compliant due diligence procedures</li>
+              </ul>
             </div>
-            <img class="exp-thumb" src="images/exp-askrindo.jpeg"
-                 style="object-position:center 20%"
-                 alt="ASKRINDO"
-                 onerror="this.style.display='none'">
+            <div class="exp-layout-photos">
+              <img class="exp-thumb" src="images/exp-askrindo.jpeg"
+                   style="object-position:center 20%"
+                   alt="ASKRINDO"
+                   onerror="this.style.display='none'">
+            </div>
           </div>
-          <ul class="exp-bullets">
-            <li>Performed <strong>financial ratio analysis for 50+ prospective clients</strong> — evaluating liquidity, solvency, and profitability to produce risk profiles used as primary references by senior underwriters</li>
-            <li>Managed policy data validation with <strong>100% accuracy</strong> across 30+ underwriting cases; reduced file review time by <strong>20%</strong> through systematic OJK-compliant due diligence procedures</li>
-          </ul>
         </div>
       </div>
 
       <!-- LANGUAGE AMBASSADOR -->
       <div class="exp-card c-teal reveal">
         <div class="exp-inner">
-          <div class="exp-head-row">
-            <div class="exp-head-left">
+          <div class="exp-layout">
+            <div class="exp-layout-text">
               <div class="exp-header">
                 <div class="exp-title">Language Ambassador — Central Sulawesi Province</div>
                 <span class="badge b-grey">Jun 2023 – Jan 2024</span>
               </div>
               <div class="exp-org o-teal">Badan Pengembangan dan Pembinaan Bahasa · Kemendikbudristek · 3rd Place — Duta Bahasa 2023</div>
+              <ul class="exp-bullets">
+                <li>Awarded <strong>3rd Place (Harapan III)</strong> in the Duta Bahasa provincial selection — representing Central Sulawesi's commitment to national language excellence and regional language preservation</li>
+                <li>Developed a <strong>trilingual digital dictionary</strong> (Indonesian–Kaili Ledo–English) achieving a <strong>4× increase in vocabulary knowledge</strong> after a single session — piloted with 42 users, now live as a Streamlit web application</li>
+                <li>Led a <strong>literacy program in Salena village</strong> — taught 30 children foundational literacy and numeracy through play-based learning in a remote underserved community</li>
+                <li>Represented Central Sulawesi at provincial public speaking events, radio broadcasts, and cultural language advocacy programs</li>
+              </ul>
             </div>
-            <img class="exp-thumb" src="images/exp-duta-mic.jpg"
-                 style="object-position:center 55%"
-                 alt="Language Ambassador — Public Speaking"
-                 onerror="this.style.display='none'">
-          </div>
-          <ul class="exp-bullets">
-            <li>Awarded <strong>3rd Place (Harapan III)</strong> in the Duta Bahasa provincial selection — representing Central Sulawesi's commitment to national language excellence and regional language preservation</li>
-            <li>Developed a <strong>trilingual digital dictionary</strong> (Indonesian–Kaili Ledo–English) achieving a <strong>4× increase in vocabulary knowledge</strong> after a single session — piloted with 42 users, now live as a Streamlit web application</li>
-            <li>Led a <strong>literacy program in Salena village</strong> — taught 30 children foundational literacy and numeracy through play-based learning in a remote underserved community</li>
-            <li>Represented Central Sulawesi at provincial public speaking events, radio broadcasts, and cultural language advocacy programs</li>
-          </ul>
-          <div class="sub-photos">
-            <div class="sub-ph">
-              <img src="images/exp-duta-radio.jpg" alt="Radio broadcast"
-                   onerror="this.src='images/exp-duta-radio.jpeg';this.onerror=function(){this.parentElement.style.display='none'}">
-            </div>
-            <div class="sub-ph">
-              <img src="images/exp-duta-salena.jpg" alt="Salena village literacy program"
-                   onerror="this.src='images/exp-duta-salena.jpeg';this.onerror=function(){this.parentElement.style.display='none'}">
+            <div class="exp-layout-photos">
+              <div class="sub-ph">
+                <img src="images/exp-duta-mic.jpg" alt="Public speaking"
+                     onerror="this.src='images/exp-duta-mic.jpeg';this.onerror=function(){this.parentElement.style.display='none'}">
+              </div>
+              <div class="sub-ph">
+                <img src="images/exp-duta-radio.jpg" alt="Radio broadcast"
+                     onerror="this.src='images/exp-duta-radio.jpeg';this.onerror=function(){this.parentElement.style.display='none'}">
+              </div>
+              <div class="sub-ph">
+                <img src="images/exp-duta-salena.jpg" alt="Salena village literacy program"
+                     onerror="this.src='images/exp-duta-salena.jpeg';this.onerror=function(){this.parentElement.style.display='none'}">
+              </div>
             </div>
           </div>
         </div>
@@ -706,96 +727,104 @@ footer p { font-size:.75rem; color:rgba(255,255,255,.25) }
       <!-- i-JaMCSIIX -->
       <div class="exp-card c-blue reveal">
         <div class="exp-inner">
-          <div class="exp-head-row">
-            <div class="exp-head-left">
+          <div class="exp-layout">
+            <div class="exp-layout-text">
               <div class="exp-header">
                 <div class="exp-title">Co-Research Team Leader — Poverty Data Clustering & PCA</div>
                 <span class="badge b-gold">🥇 Gold Medal</span>
               </div>
               <div class="exp-org o-blue">Universiti Teknologi MARA (UiTM) · Remote · Selangor, Malaysia · Oct – Nov 2023</div>
+              <ul class="exp-bullets">
+                <li>Co-led data science research on poverty disparities in Central Sulawesi — uncovering a clear divide between Kota Palu and 12 surrounding regencies, producing a framework for targeted regional policymaking</li>
+                <li>Developed and deployed an interactive R Shiny dashboard enabling visualization of poverty group classifications using <strong>PCA + Average Linkage hierarchical clustering</strong> (PC1+PC2 explain 82.67% variance)</li>
+                <li>Applied dimensionality reduction to transform complex, multivariate socioeconomic data into actionable insights for policymakers</li>
+                <li>Awarded <strong>Gold Medal at i-JaMCSIIX 2023</strong> at Universiti Teknologi MARA (UiTM) Cawangan Melaka, Malaysia</li>
+              </ul>
             </div>
-            <img class="exp-thumb" src="images/exp-ijamcsiix.jpg"
-                 style="object-position:center center"
-                 alt="i-JaMCSIIX Team Malaysia"
-                 onerror="this.style.display='none'">
+            <div class="exp-layout-photos">
+              <img class="exp-thumb" src="images/exp-ijamcsiix.jpg"
+                   style="object-position:center center"
+                   alt="i-JaMCSIIX Team Malaysia"
+                   onerror="this.style.display='none'">
+            </div>
           </div>
-          <ul class="exp-bullets">
-            <li>Co-led data science research on poverty disparities in Central Sulawesi — uncovering a clear divide between Kota Palu and 12 surrounding regencies, producing a framework for targeted regional policymaking</li>
-            <li>Developed and deployed an interactive R Shiny dashboard enabling visualization of poverty group classifications using <strong>PCA + Average Linkage hierarchical clustering</strong> (PC1+PC2 explain 82.67% variance)</li>
-            <li>Applied dimensionality reduction to transform complex, multivariate socioeconomic data into actionable insights for policymakers</li>
-            <li>Awarded <strong>Gold Medal at i-JaMCSIIX 2023</strong> at Universiti Teknologi MARA (UiTM) Cawangan Melaka, Malaysia</li>
-          </ul>
         </div>
       </div>
 
       <!-- WYIIA -->
       <div class="exp-card c-gold reveal">
         <div class="exp-inner">
-          <div class="exp-head-row">
-            <div class="exp-head-left">
+          <div class="exp-layout">
+            <div class="exp-layout-text">
               <div class="exp-header">
                 <div class="exp-title">Research Team Leader — ML-Based Time Series Forecasting</div>
                 <span class="badge b-gold">🥇 Gold Medal</span>
               </div>
               <div class="exp-org o-gold">Indonesian Young Scientist Association (IYSA) · Remote · Yogyakarta · Aug – Oct 2023</div>
+              <ul class="exp-bullets">
+                <li>Led development of a machine learning–based time series forecasting model for USD/IDR currency fluctuations using <strong>Facebook Prophet</strong> — achieving <strong>99.993% accuracy</strong> (MAPE 0.0065%) on test data</li>
+                <li>Applied trend decomposition, holiday effects, and parameter tuning to optimize forecast precision across 166 training data points</li>
+                <li>Directed end-to-end research lifecycle: data scraping, model development, and technical defense for an international jury in Yogyakarta</li>
+                <li>Awarded <strong>Gold Medal at WYIIA 2023</strong> (World Youth Invention and Innovation Award) — Mathematics Category</li>
+              </ul>
             </div>
-            <img class="exp-thumb" src="images/exp-wyiia.jpeg"
-                 style="object-position:center center"
-                 alt="WYIIA Research Team"
-                 onerror="this.style.display='none'">
+            <div class="exp-layout-photos">
+              <img class="exp-thumb" src="images/exp-wyiia.jpg"
+                   style="object-position:center center"
+                   alt="WYIIA Research Team"
+                   onerror="this.src='images/exp-wyiia.jpeg';this.onerror=function(){this.style.display='none'}">
+            </div>
           </div>
-          <ul class="exp-bullets">
-            <li>Led development of a machine learning–based time series forecasting model for USD/IDR currency fluctuations using <strong>Facebook Prophet</strong> — achieving <strong>99.993% accuracy</strong> (MAPE 0.0065%) on test data</li>
-            <li>Applied trend decomposition, holiday effects, and parameter tuning to optimize forecast precision across 166 training data points</li>
-            <li>Directed end-to-end research lifecycle: data scraping, model development, and technical defense for an international jury in Yogyakarta</li>
-            <li>Awarded <strong>Gold Medal at WYIIA 2023</strong> (World Youth Invention and Innovation Award) — Mathematics Category</li>
-          </ul>
         </div>
       </div>
 
       <!-- INSPECTORATE -->
       <div class="exp-card c-purple reveal">
         <div class="exp-inner">
-          <div class="exp-head-row">
-            <div class="exp-head-left">
+          <div class="exp-layout">
+            <div class="exp-layout-text">
               <div class="exp-header">
                 <div class="exp-title">Program, Finance & Asset Management Intern</div>
                 <span class="badge b-grey">Jul – Aug 2023</span>
               </div>
               <div class="exp-org o-purple">Regional Inspectorate of Central Sulawesi Province · Government · Palu</div>
+              <ul class="exp-bullets">
+                <li>Validated and reconciled <strong>1,000+ financial records</strong> across 5 government departments via SIPD RI, identifying <strong>30+ discrepancies</strong> — ensured 100% audit readiness</li>
+                <li>Performed target vs. actual budget variance analysis to support cross-regional financial planning for 20+ budget sub-activities</li>
+              </ul>
             </div>
-            <img class="exp-thumb" src="images/exp-inspectorate.jpeg"
-                 style="object-position:center center"
-                 alt="Regional Inspectorate"
-                 onerror="this.style.display='none'">
+            <div class="exp-layout-photos">
+              <img class="exp-thumb" src="images/exp-inspectorate.jpg"
+                   style="object-position:center center"
+                   alt="Regional Inspectorate"
+                   onerror="this.src='images/exp-inspectorate.jpeg';this.onerror=function(){this.style.display='none'}">
+            </div>
           </div>
-          <ul class="exp-bullets">
-            <li>Validated and reconciled <strong>1,000+ financial records</strong> across 5 government departments via SIPD RI, identifying <strong>30+ discrepancies</strong> — ensured 100% audit readiness</li>
-            <li>Performed target vs. actual budget variance analysis to support cross-regional financial planning for 20+ budget sub-activities</li>
-          </ul>
         </div>
       </div>
 
       <!-- ASSISTANT LECTURER -->
       <div class="exp-card c-gold reveal">
         <div class="exp-inner">
-          <div class="exp-head-row">
-            <div class="exp-head-left">
+          <div class="exp-layout">
+            <div class="exp-layout-text">
               <div class="exp-header">
                 <div class="exp-title">Assistant Lecturer — Statistical Methods & Experimental Design</div>
                 <span class="badge b-grey">Jan 2023 – Jul 2024</span>
               </div>
               <div class="exp-org o-gold">Tadulako University · Palu · 2 Semesters · 100+ Students</div>
+              <ul class="exp-bullets">
+                <li>Guided <strong>100+ undergraduate students</strong> across two semesters in R, Python, and Minitab — covering regression analysis, ANOVA, factorial designs, Latin square, and model diagnostics</li>
+                <li>Authored two lab modules adopted as primary reference for <strong>3 subsequent cohorts</strong> — explanation time ↓20%, average scores ↑15%, correction errors ↓10%</li>
+              </ul>
             </div>
-            <img class="exp-thumb" src="images/exp-teaching.jpeg"
-                 style="object-position:center center"
-                 alt="Teaching at Tadulako University"
-                 onerror="this.style.display='none'">
+            <div class="exp-layout-photos">
+              <img class="exp-thumb" src="images/exp-teaching.jpg"
+                   style="object-position:center center"
+                   alt="Teaching at Tadulako University"
+                   onerror="this.src='images/exp-teaching.jpeg';this.onerror=function(){this.style.display='none'}">
+            </div>
           </div>
-          <ul class="exp-bullets">
-            <li>Guided <strong>100+ undergraduate students</strong> across two semesters in R, Python, and Minitab — covering regression analysis, ANOVA, factorial designs, Latin square, and model diagnostics</li>
-            <li>Authored two lab modules adopted as primary reference for <strong>3 subsequent cohorts</strong> — explanation time ↓20%, average scores ↑15%, correction errors ↓10%</li>
-          </ul>
         </div>
       </div>
 
