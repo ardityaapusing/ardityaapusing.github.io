@@ -769,7 +769,7 @@ footer p { font-size:.75rem; color:rgba(255,255,255,.25) }
               </ul>
             </div>
             <div class="exp-layout-photos">
-              <img class="exp-thumb" src="images/exp-wyiia.jpeg"
+              <img class="exp-thumb" src="images/exp-wyiia.jpg"
                    style="object-position:center center"
                    alt="WYIIA Research Team">
             </div>
@@ -793,7 +793,7 @@ footer p { font-size:.75rem; color:rgba(255,255,255,.25) }
               </ul>
             </div>
             <div class="exp-layout-photos">
-              <img class="exp-thumb" src="images/exp-inspectorate.jpeg"
+              <img class="exp-thumb" src="images/exp-inspectorate.jpg"
                    style="object-position:center center"
                    alt="Regional Inspectorate">
             </div>
@@ -817,7 +817,7 @@ footer p { font-size:.75rem; color:rgba(255,255,255,.25) }
               </ul>
             </div>
             <div class="exp-layout-photos">
-              <img class="exp-thumb" src="images/exp-teaching.jpeg"
+              <img class="exp-thumb" src="images/exp-teaching.jpg"
                    style="object-position:center center"
                    alt="Teaching at Tadulako University">
             </div>
@@ -1220,36 +1220,13 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-/* ── Auto-fix image extensions ──────────── *
-   Tries .jpeg if .jpg fails, and vice versa.
-   Also hides photo-ph overlay when image loads. */
-document.querySelectorAll('img').forEach(img => {
-  // hide placeholder when image loads successfully
+/* ── Hide aw-cert placeholder when image loads ── */
+document.querySelectorAll('.aw-cert img').forEach(img => {
   img.addEventListener('load', () => {
-    const ph = img.closest('.exp-photo, .aw-cert, .sub-ph');
+    const ph = img.closest('.aw-cert');
     if (ph) {
-      const placeholder = ph.querySelector('.exp-photo-ph, .aw-cert-ph');
+      const placeholder = ph.querySelector('.aw-cert-ph');
       if (placeholder) placeholder.style.display = 'none';
-    }
-  });
-
-  // try alternate extension on error
-  img.addEventListener('error', function () {
-    const src = this.getAttribute('src') || '';
-    if (src.endsWith('.jpg') && !this.dataset.tried) {
-      this.dataset.tried = '1';
-      this.src = src.replace('.jpg', '.jpeg');
-    } else if (src.endsWith('.jpeg') && !this.dataset.tried) {
-      this.dataset.tried = '1';
-      this.src = src.replace('.jpeg', '.jpg');
-    } else {
-      // Both failed — only hide wrapper for sub-ph, not exp-thumb (exp-thumb hides itself)
-      if (this.classList.contains('exp-thumb')) {
-        this.style.display = 'none';
-      } else {
-        const ph = this.closest('.exp-photo, .sub-ph');
-        if (ph) ph.style.height = '0';
-      }
     }
   });
 });
